@@ -25,7 +25,8 @@ def scrape():
     craigs_data = scraping.scrape_all(city, item)
 
     items.update({}, craigs_data, upsert=True)
-    return render_template('display.html', items=items)
+    myitem= mongo.db.items.find_one()
+    return render_template('display.html', items=myitem)
 
 if __name__ == "__main__":
     app.run(debug=True)

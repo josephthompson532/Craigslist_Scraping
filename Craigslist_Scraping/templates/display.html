@@ -3,18 +3,14 @@
 
 {% block content %}
 
-
-<div class="card-group">
-    {% for title in items.craigs_listing_title %}
-    <div class="card">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{title.item_title}}</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
+<p>testing</p>
+{% for title in items.craigs_listing_title %}
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text">{{title.item_title}}</p>
     </div>
-    {% endfor %}
-</div>
+  </div>
+{% endfor %}
 
 {% endblock %}

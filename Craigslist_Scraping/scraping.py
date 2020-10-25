@@ -29,7 +29,7 @@ def get_title(browser, city, item):
     
     try:
 
-        all_titles = mysoup.select("ul.rows li.result-row h2 a")[0:12]
+        all_titles = mysoup.select("ul.rows li.result-row h2 a")[0:3]
 
         for text in all_titles:
 
