@@ -9,7 +9,7 @@ def scrape_all(city, item):
     browser = Browser('chrome',executable_path="/usr/local/bin/chromedriver", headless=True)
 
     data = {
-        "Item Title": get_title(browser,city, item)
+        "craigs_listing_title": get_title(browser,city, item)
     }
 
     browser.quit()
@@ -29,17 +29,17 @@ def get_title(browser, city, item):
     
     try:
 
-        title = mysoup.select("ul.rows li.result-row h2 a")
+        all_titles = mysoup.select("ul.rows li.result-row h2 a")[0:12]
 
-        for text in title:
+        for text in all_titles:
 
-            item_titles = {}
+            title = {}
 
             my_title = text.get_text()
 
-            item_titles['item_title']=my_title
+            title['item_title']=my_title
 
-            item_titles_collection.append(item_titles)
+            item_titles_collection.append(title)
     except: 
         print("Your script failed to scrape.")
     

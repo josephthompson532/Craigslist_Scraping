@@ -25,7 +25,7 @@ def scrape():
     craigs_data = scraping.scrape_all(city, item)
 
     items.update({}, craigs_data, upsert=True)
-    return "Scraping Successful"
+    return render_template('display.html', items=items)
 
 if __name__ == "__main__":
     app.run(debug=True)
