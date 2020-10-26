@@ -26,22 +26,36 @@ def get_title(browser, city, item):
     item_titles_collection=[]
 
     mysoup = soup(html, "html.parser")
-    
-    try:
 
-        all_titles = mysoup.select("ul.rows li.result-row h2 a")[0:3]
+    all_titles = mysoup.select("ul.rows li.result-row h2 a")[0:12]
 
-        for text in all_titles:
+    for text in all_titles:
 
-            title = {}
+        title = {}
+
+        try:
 
             my_title = text.get_text()
 
             title['item_title']=my_title
+            
+            link = text['href']
+            
+            browser.visit(link)
+            
+            html= browser.html
+            
+            mysoup = soup(html,'html.parser')
+            
+            img_url = mysoup.select_one('div.swipe img')['src']
+            
+            title['image']=img_url
 
             item_titles_collection.append(title)
-    except: 
-        print("Your script failed to scrape.")
+        
+        except:
+            print('something went wrong with the scraping')
+    
     
     return item_titles_collection
     
