@@ -27,7 +27,7 @@ def get_title(browser, city, item):
 
     mysoup = soup(html, "html.parser")
 
-    all_titles = mysoup.select("ul.rows li.result-row h2 a")[0:12]
+    all_titles = mysoup.select("ul.rows li.result-row")[0:12]
 
     for text in all_titles:
 
@@ -35,23 +35,29 @@ def get_title(browser, city, item):
 
         try:
 
-            my_title = text.get_text()
+            my_title = text.select_one('h2 a').get_text()
 
             title['item_title']=my_title
-            
-            link = text['href']
-            
+
+            link = text.select_one('h2 a')['href']
+
             browser.visit(link)
-            
+
             html= browser.html
-            
+
             mysoup = soup(html,'html.parser')
-            
+
             img_url = mysoup.select_one('div.swipe img')['src']
-            
+
             title['image']=img_url
 
+            price = text.select_one('span.result-price').get_text()
+
+            title['price']=price
+
             item_titles_collection.append(title)
+
+
         
         except:
             print('something went wrong with the scraping')
